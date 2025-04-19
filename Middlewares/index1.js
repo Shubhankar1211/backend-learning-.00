@@ -15,43 +15,35 @@ function agecal(age){
     }
 }
 
-app.get('/ride1',function(req,res){
-    if(agecal(req.query.age)){
-        res.json({
-            msg : "you have succesfully riden a ride 1"
-           })
-    }else{
-        res.status(411).json({
-            msg : " sorry you are not of age yet"
-        })
+function middleware1(req,res,next){
+    const age = req.query.age;
+    if(age >=14){
+       next();
     }
+    else{
+        res.json({
+            msg : "sorry you are not of age yet",
+         })
+    }
+}
+
+app.get('/ride1',middleware1,function(req,res){
+    res.json({
+        msg : "you have successfully riden the ride 1"
+    })
 })
 
 
-app.get('/ride2',function(req,res){
-    if(agecal(req.query.age)){
-        res.json({
-            msg : "you have succesfully riden a ride 2"
-           })
-    }else{
-        res.status(411).json({
-            msg : " sorry you are not of age yet"
-        })
-    }
+app.get('/ride2',middleware1,function(req,res){
+    res.json({
+         msg : "you have successfully riden the ride 2"
+    })  
 })
 
 
-app.get('/ride3',function(req,res){
-    if(agecal(req.query.age)){
-        res.json({
-            msg : "you have succesfully riden a ride 3"
-           })
-    }else{
-        res.status(411).json({
-            msg : " sorry you are not of age yet"
-        })
-    }
+app.get('/ride3',middleware1,function(req,res){
+    res.json({
+       msg : "you have successfully riden the ride 3"
+    }) 
 })
-
-
 app.listen(3001);
