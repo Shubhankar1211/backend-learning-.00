@@ -27,6 +27,8 @@ function middleware1(req,res,next){
     }
 }
 
+app.use(middleware1); // this is the way in which i can assigne miidlewar to very route of the proggrame // and also the order matters a lot for this like if i put this below a route then the route cant access the route of it 
+
 app.get('/ride1',middleware1,function(req,res){
     res.json({
         msg : "you have successfully riden the ride 1"
