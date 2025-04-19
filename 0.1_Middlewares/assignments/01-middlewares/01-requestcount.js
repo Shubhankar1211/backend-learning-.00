@@ -11,7 +11,8 @@ let requestCount = 0;
 // requestCount variable
 
 
-// Done by me
+// this is the assignment code only
+// this is the one very  important matric inbackend to make sure your server getting overwelmed thsi its keeep track how many users are hiiting you servers no of req
 let requestCountMiddleware = function(req, res, next) {
   requestCount++;
   next();
@@ -31,5 +32,7 @@ app.post('/user', function(req, res) {
 app.get('/requestCount', function(req, res) {
   res.status(200).json({ requestCount });
 });
+
+app.listen(3000);
 
 module.exports = app;
