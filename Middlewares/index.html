@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creating a background request</title>
+</head>
+<body>
+    linkdin
+    <div id="posts"></div>
+    <script>
+        //this is by async and await
+        async function getResentPost(){
+            console.log("before sending request");
+            const respose = await fetch("https://jsonplaceholder.typicode.com/posts/1") // this is the way we are sending backgorund reqeust to the another server from our own server or website //fetch is the fucnton which browser gave you// it also accept the methds headers cookies body // fetch returs the promise `
+            const data = await respose.json();
+            console.log(data);
+            console.log("request has been processed")
+            document.getElementById("posts").innerHTML = data.body // this is the line which puts the data from herer to html part 
+        }
+
+        // this is axios with the help of axios an external lib // its has some clearerly syntax samll syntax
+        async function getResentPost1() {
+            console.log("before sending request");
+            const respose = await axios.get("https://jsonplaceholder.typicode.com/posts/1")
+            document.getElementById("posts").innerHTML= respose.body
+        }
+        getResentPost();
+
+
+
+
+    </script>
+</body>
+</html>
