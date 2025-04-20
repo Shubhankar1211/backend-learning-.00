@@ -1,6 +1,16 @@
 const express = require("express");
 const app = express();
 
+
+// this is how we create the middleware in which we can count how many request is going on
+let requestCountMiddleware = function(req,res,next){
+    requestCount++;
+    console.log("total number of requests = "+ requestCount)
+    next();
+}
+app.use(requestCountMiddleware);
+
+
 // these are 2 are with the function method 
 function subtrat(a,b){
     const subtraction = a-b;
