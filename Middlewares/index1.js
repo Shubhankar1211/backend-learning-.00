@@ -46,4 +46,3 @@ app.get('/ride3',middleware1,function(req,res){
        msg : "you have successfully riden the ride 3"
     }) 
 })
-app.listen(3001);
