@@ -12,6 +12,16 @@ const app = express()
 // the sol for it is in express , if you want to send hson data // you need to first parse the json data naswer given bellow
 app.use(express.json());
 app.use(cors())
+
+
+// this is the way in which we can host frontend and backend on server
+app.get('/',function(req,res){
+    res.sendFile(__dirname + "/Middlewares/public/index2.html")
+})
+
+
+
+
 app.post('/mul',function(req,res){
     console.log(req.body) // ye nahi karnege ot dikhega hi nahi kuch 
     const a = parseInt(req.body.a); 
