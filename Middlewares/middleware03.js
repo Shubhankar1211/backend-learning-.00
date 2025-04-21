@@ -29,4 +29,4 @@ app.post('/mul',function(req,res){
 // if you want to make cors request you can use cors middleware
 
 
-app.listen(3003)
+app.listen(3000)

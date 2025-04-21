@@ -41,4 +41,3 @@ app.get('/auth',authentication1,function(){
 
 })
 
-app.listen(3002);
