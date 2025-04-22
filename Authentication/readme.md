@@ -1,0 +1,3 @@
+# once you send request it return tokens the it keeps going on until you log out and in this the token help visitng every part of website and everytime they given you a new token whenever you login 
+
+# the user comes to your website -> the user sends a request to  signup with thier username and password,the user gets back a token , in every subsequent request , the user sends the tokens to identify it self to the backend. in simple terms(think of the token like a secret that the server haas given you. you send that secret back to the server in every request so that the server knows who you are)
