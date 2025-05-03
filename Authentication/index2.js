@@ -21,6 +21,10 @@ const JWT_SECRET = "shubhankar"
 
 const users =[]
 
+app.get("/",function(req,res){
+    res.sendFile(__dirname + "/Authentication/public/index.html")
+  })
+
 
 app.post("/signup",function(req,res){
     const username = req.body.username;

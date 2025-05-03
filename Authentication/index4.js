@@ -12,6 +12,11 @@ function logger(req, res, next) {
   next();
 }
 
+app.get("/",function(req,res){
+  res.sendFile(__dirname
+    + "/Authentication/public/index.html")
+})
+
 app.post('/signup', logger, function (req, res) {
   const username = req.body.username;
   const password = req.body.password;
@@ -84,7 +89,7 @@ app.get('/me', logger, auth, function (req, res) {
   }
 
   if (!foundUser) {
-    return res.status(404).json({ msg: "User not found" });  // ✅ added safe check
+    return res.status(404).json({ msg: "User not found" }); 
   }
 
   res.json({
@@ -93,4 +98,4 @@ app.get('/me', logger, auth, function (req, res) {
   });
 });
 
-app.listen(3002)
+app.listen(3000)
