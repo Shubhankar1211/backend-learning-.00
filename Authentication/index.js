@@ -1,5 +1,7 @@
+//  we have created here a very baisc exprss application simple signin and signup page.
 const express  =require("express");
 const app =  express();
+
 app.use(express.json());
 
 
@@ -25,7 +27,7 @@ function randomToken(){
 
 app.post('/signup',function(req,res){
     const username = req.body.username;
-    const password = req.body.username;
+    const password = req.body.password;
 
     users.push({
         username : username,
@@ -35,12 +37,13 @@ app.post('/signup',function(req,res){
     res.json({
         msg : "you are signed up"
     })
+    console.log(users)
 })
 
 
 app.post('/signin',function(req,res){
     const username = req.body.username;
-    const password = req.body.username;
+    const password = req.body.password;
 
     const foundUser = users.find(function(u){
         if(u.username === username && u.password === password){
@@ -56,13 +59,46 @@ app.post('/signin',function(req,res){
         res.json({
             token : token,
         })
+        console.log(users);
     }
     else{
-        res.status(403).end({
-            msg : "Invalid uesername or password"
+        res.status(403).send({
+            msg : "Invalid username or password"
         })
     }
 })
 
 
-app.listen(3000);
+// this is the real  me endpoint where we  get the username and password from the token
+app.get("/me", function(req,res){
+    const token = req.headers.token
+    console.log("Token received:", token);
+    let foundUser = null;
+    //const user = users.find(user => user.token === token); // this same line will work same as the for loop for finsing the users
+
+
+    
+    for(let i = 0 ; i<users.length; i++){
+        if(users[i].token == token){
+            foundUser = users[i];
+        }
+    }
+
+    if(foundUser){
+        res.json({
+            username : foundUser.username,
+            password : foundUser.password
+        })
+    }else{
+        res.json({
+            msg: "token is invalid "
+        })
+    }
+})
+
+ 
+
+
+app.listen(3000, () => {
+    console.log("Server started on port 3000");
+});

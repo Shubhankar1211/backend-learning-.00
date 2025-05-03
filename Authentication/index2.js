@@ -50,7 +50,11 @@ app.post("/signin",function(req,res){
 
     if(foundUser){
         const token  = jwt.sign({  /// this will generate the token
-            username : username
+            username : username,
+           // password : password,
+            //firstname,
+            //lastname,
+           // courses: []
         },JWT_SECRET);
 
 
@@ -72,7 +76,8 @@ app.get("/me", function (req, res) {
     const token = req.headers.token;
     
     try {
-        const decodedInformation = jwt.verify(token, JWT_SECRET); // can throw error
+        const decodedInformation = jwt.verify(token, JWT_SECRET);
+        //const anAuthDecodedInfo = jwt.decode(token,) // can throw error
         const username = decodedInformation.username;
 
         let foundUser = null;
