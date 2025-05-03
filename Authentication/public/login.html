@@ -21,13 +21,28 @@
     async function signin() {
         const username = document.getElementById('signin-username').value
         const password = document.getElementById('signin-password').value
-        const respose = await axios.post("http://localhost:3000/signup", {
+        const response = await axios.post("http://localhost:3000/signin", {
             username: username,
             password: password
         })
 
-        localStorage.setItem("token", respose.data.token)
+        localStorage.setItem("token", response.data.token)
         alert("you are signed in")
+    }
+
+    async function getUserInformation() {
+        const response = await axios.get("http://localhost:3000/me", {
+            headers: {
+                token: localStorage.getItem("token")
+            }
+        })
+        document.getElementById("information").innerHTML =
+            "Username: " + response.data.username + " Password: " + response.data.password
+    }
+    getUserInformation();
+
+    function logout() {
+        localStorage.removeItem("token")
     }
 </script>
 

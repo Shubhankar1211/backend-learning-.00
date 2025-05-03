@@ -14,7 +14,7 @@ function logger(req, res, next) {
 
 app.get("/",function(req,res){
   res.sendFile(__dirname
-    + "/Authentication/public/index.html")
+    + "/Authentication/public/login.html")
 })
 
 app.post('/signup', logger, function (req, res) {
@@ -99,3 +99,11 @@ app.get('/me', logger, auth, function (req, res) {
 });
 
 app.listen(3000)
+
+
+// conditionally render the logout or the signin / signup pages based on if the user is already logged in or not 
+// creating a todo app
+
+// user can signup and signin 
+// usercan create delete/update todods
+// user can see theirexisting todos and mark tham as done
