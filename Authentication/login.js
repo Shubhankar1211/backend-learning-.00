@@ -1,6 +1,6 @@
-// create a middleware called auth that verifies if a user is logged in and ends the request early if the user isn't logged in
 const express = require("express");
 const jwt = require("jsonwebtoken");
+const path = require("path"); 
 const app = express();
 app.use(express.json());
 const JWT_SECRET = "shubhankar";
@@ -12,10 +12,9 @@ function logger(req, res, next) {
   next();
 }
 
-app.get("/",function(req,res){
-  res.sendFile(__dirname
-    + "/Authentication/public/login.html")
-})
+app.get("/", function (req, res) {
+  res.sendFile(path.join(__dirname, "Authentication", "public", "login.html")); // ✅ Safely joined path
+});
 
 app.post('/signup', logger, function (req, res) {
   const username = req.body.username;
@@ -89,7 +88,7 @@ app.get('/me', logger, auth, function (req, res) {
   }
 
   if (!foundUser) {
-    return res.status(404).json({ msg: "User not found" }); 
+    return res.status(404).json({ msg: "User not found" });
   }
 
   res.json({
@@ -98,12 +97,4 @@ app.get('/me', logger, auth, function (req, res) {
   });
 });
 
-app.listen(3000)
-
-
-// conditionally render the logout or the signin / signup pages based on if the user is already logged in or not 
-// creating a todo app
-
-// user can signup and signin 
-// usercan create delete/update todods
-// user can see theirexisting todos and mark tham as done
+app.listen(3000);
