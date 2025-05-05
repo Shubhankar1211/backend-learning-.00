@@ -6,6 +6,8 @@
 // realtionships in mongo
 // add validatons to ensure emails and password are corect format 
 
+
+// so this is the brute or raw  auth + todo 
 const express = require("express");
 
 const mongoose = require("mongoose")
@@ -23,7 +25,7 @@ app.use(express.json());
 
 
 
-app.post("/signup", async function (req, res) {
+app.post("/signup", async function (req, res) {  // ti is returnign promise that is why we we are you using await ans async 
     const email = req.body.email
     const password = req.body.password
     const name = req.body.name
@@ -55,14 +57,14 @@ app.post("/signin", async function (req, res) {
 
     if (user) {
         const token = jwt.sign({
-            id: user._id
+            id: user._id.toString()
         }, JWT_SECRET);
         res.json({
             token: token
         })
     }
     else {
-        res.Status(403).json({
+        res.status(403).json({
             message: "Incorrect credentials"
         })
     }
@@ -70,17 +72,54 @@ app.post("/signin", async function (req, res) {
 
 
 
+function auth(req, res, next) {
+    const token = req.headers.token // this is the which we take out the token form the signin
+    const decodedData = jwt.verify(token, JWT_SECRET); // here we verify that we are the one who create this token
+
+    if (decodedData) {
+        ;
+        // req.userId = decodedData.userId // ki jo request me user id ayi h or jo hamen bayi thi vo same h then we get the correct credentialas 
+        req.userId = decodedData.id// agar upper wale me hamne decodeddata.id nahi likhi ye empty object return kar dega isliye hame jo id database bna rha h vo hi id deni h
+        next();
+    }
+    else {
+        res.status(403).json({
+            message: "Incorrect credentials"
+        })
+    }
+}
 
 
 
-app.post("/todo", function (req, res) {
 
+app.post("/todo", auth, async function (req, res) {
+    const userId = req.userId
+    const title = req.body.title
+    const done = req.body.done
+
+
+    await TodoModel.create({
+        userId,
+        title,
+        done,
+    })
+
+    res.json({
+        message : "todo created"
+    })
 })
 
 
 
-app.get("/todos", function (req, res) {
+app.get("/todos", auth, async function (req, res) {
+    const userId = req.userId// thorugh this we get the id and thorugh all the auth
+    const todos = await TodoModel.find({
+        userId
+    })
 
+    res.json({
+        todos
+    })
 })
 
 

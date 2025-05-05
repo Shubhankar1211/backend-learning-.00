@@ -8,6 +8,7 @@ const app = express();
 const JWT_SECRET = "shubhankar";
 
 app.use(express.json());
+app.use(express.static("public"));
 
 mongoose.connect("mongodb+srv://admin:admin05%40@cluster0.ntmjrlu.mongodb.net/todo-app-database");
 
