@@ -16,25 +16,33 @@ mongoose.connect("mongodb+srv://admin:admin05%40@cluster0.ntmjrlu.mongodb.net/to
 
 
 //  Signup
-app.post("/signup", async (req, res) => {
+app.post("/signup", async function (req, res) {
     const { email, password, name } = req.body;
 
+    if (!email || !password || !name) {
+        return res.status(400).json({ message: "All fields are required" });
+    }
+
     try {
-        const hashedPassword = await bcrypt.hash(password, 10);
+        // Hash the password with 10 salt rounds
+        const hashedpassword = await bcrypt.hash(password, 10);
+
         await UserModel.create({
-            email,
-            password: hashedPassword,
-            name
+            email: email,
+            password: hashedpassword,
+            name: name
         });
 
         res.json({ message: "You are signed up" });
+
     } catch (e) {
-        if (e.code === 11000) {
+        if (e.code === 11000) {  // Duplicate email error
             return res.status(400).json({ message: "Email already in use" });
         }
         res.status(500).json({ message: "Signup failed", error: e.message });
     }
 });
+
 
 
 

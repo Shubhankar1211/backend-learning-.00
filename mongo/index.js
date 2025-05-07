@@ -39,7 +39,8 @@ app.post("/signup", async function (req, res) {  // ti is returnign promise that
     const parsedDataWithSuccess = requiredBody.safeParse(req.body); // this is the second step
     if(!parsedDataWithSuccess.success){ // if the fromat is wrong than it will print 
         res.json({
-            msg : "incorrect format"
+            msg : "incorrect format",
+            error : parsedDataWithSuccess.error // it will return the things which we left in the inputs this is prebuilt things in the zod
         })
         return
     }
@@ -207,5 +208,52 @@ app.listen(3000);
 // jod  it is a scehma validation library which help us to fixed the input which user want to give us 
 
 
+// zod assignment -> Check that the password has 1 uppercase char ,1 lower case char , 1 special character
 
 
+/*
+1. Referenced Relationship (Normalization)
+One document refers to another using an ObjectId.
+
+Keeps data separate and scalable.
+
+Use when:
+
+Documents grow large.
+
+Relationships are many-to-one or many-to-many.
+
+Access with .populate() in Mongoose.
+
+📦 2. Embedded Relationship (Denormalization)
+One document contains another directly.
+
+Faster reads but not scalable if the sub-document list grows large.
+
+Use when:
+
+Data is tightly coupled.
+
+Sub-documents are small and rarely change individually.
+
+This is similar to:
+
+SQL JOINs ⇒ Referenced
+
+JSON nesting ⇒ Embedded
+
+Do you want a quick real-world example comparing both styles?
+
+
+
+
+
+
+
+You said:
+ya sute
+
+
+ChatGPT said:
+Great! Here's a simple example to show the difference between referenced and embedded relationships using a User and their Todos.
+*/
