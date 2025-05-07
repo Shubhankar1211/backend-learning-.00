@@ -11,11 +11,16 @@
 const express = require("express");
 const bcrypt  = require("bcrypt")
 const mongoose = require("mongoose")
+const jwt = require("jsonwebtoken");
+const {z} = require("zod");
+
+
+
 mongoose.connect("mongodb+srv://admin:admin05%40@cluster0.ntmjrlu.mongodb.net/todo-app-database")
 const { UserModel, TodoModel } = require("./db");
 
 
-const jwt = require("jsonwebtoken");
+
 const JWT_SECRET = "shubhankar";
 
 
@@ -23,14 +28,54 @@ const app = express();
 app.use(express.json());
 
 
+app.post("/signup", async function (req, res) {  // ti is returnign promise that is why we we are you using await ans async 
+
+    const requiredBody = z.object({ // in zod you have to declare the schema the it is very easy for us to  input validattion  and this is the first step 
+        email : z.string().min(3).max(100).email(),
+        password : z.string().min(3).max(100),
+        name : z.string().min(3).max(30)
+    })
+
+    const parsedDataWithSuccess = requiredBody.safeParse(req.body); // this is the second step
+    if(!parsedDataWithSuccess.success){ // if the fromat is wrong than it will print 
+        res.json({
+            msg : "incorrect format"
+        })
+        return
+    }
+
+    const email = req.body.email
+    const password = req.body.password
+    const name = req.body.name
+
+    try {
+        const hashedpassword = await bcrypt.hash(password,5) // this 5 is how many time you have to interate the hashed password
+        console.log(hashedpassword);
+
+        await UserModel.create({
+            email: email,
+            password:hashedpassword,
+            name: name
+        })
+
+        res.json({
+            message: "you are signed up"
+        })
+    } catch (e) {
+        res.status(500).json({ message: "Signup failed", error: e.message })
+    }
+})
 
 
+
+/* this is to handel error for that we rap them in try and catch
 app.post("/signup", async function (req, res) {  // ti is returnign promise that is why we we are you using await ans async 
     const email = req.body.email
     const password = req.body.password
     const name = req.body.name
 
 
+   try {
     const hashedpassword = await bcrypt.hash(password,5) // this 5 is how many time you have to interate the hashed password
     console.log(hashedpassword);
 
@@ -40,12 +85,20 @@ app.post("/signup", async function (req, res) {  // ti is returnign promise that
         name: name
     })
 
-    
     res.json({
         message: "you are signed up"
     })
 
+   } catch (e) {
+    if (e.code === 11000) {
+        return res.status(400).json({
+             message: "Email already in use" });
+    }
+    res.status(500).json({
+         message: "Signup failed", error: e.message });
+   }
 })
+*/
 
 
 
@@ -150,6 +203,8 @@ app.listen(3000);
 
 //salt 
 // a popular approach to hashing password involves using a hashing algorithm that imcorprates a salt a random value addedd to the password before hashing. this prevents attackers from using precomputes tabels(rainbow tabels)to crack passwords;
+
+// jod  it is a scehma validation library which help us to fixed the input which user want to give us 
 
 
 
