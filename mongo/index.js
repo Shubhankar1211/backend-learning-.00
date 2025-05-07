@@ -9,7 +9,7 @@
 
 // so this is the brute or raw  auth + todo 
 const express = require("express");
-
+const bcrypt  = require("bcrypt")
 const mongoose = require("mongoose")
 mongoose.connect("mongodb+srv://admin:admin05%40@cluster0.ntmjrlu.mongodb.net/todo-app-database")
 const { UserModel, TodoModel } = require("./db");
@@ -30,12 +30,17 @@ app.post("/signup", async function (req, res) {  // ti is returnign promise that
     const password = req.body.password
     const name = req.body.name
 
+
+    const hashedpassword = await bcrypt.hash(password,5) // this 5 is how many time you have to interate the hashed password
+    console.log(hashedpassword);
+
     await UserModel.create({
         email: email,
-        password: password,
+        password:hashedpassword,
         name: name
     })
 
+    
     res.json({
         message: "you are signed up"
     })
@@ -51,11 +56,20 @@ app.post("/signin", async function (req, res) {
 
     const user = await UserModel.findOne({
         email: email,
-        password: password
     })
     console.log(user);
 
-    if (user) {
+   if(!user){
+    res.status(403).json({
+        msg :" user is not in our database "
+    })
+    return
+   }
+
+
+   const passewordMatch = await bcrypt.compare(password, user.password); // this is how we sign in like when we signed up we enter the password and hashed it and directly stored in the database // so now in sign in endpoint when we enter our passord it will compare the hashed password which is stored in the database if they match then we can login 
+
+    if (passewordMatch) {
         const token = jwt.sign({
             id: user._id.toString()
         }, JWT_SECRET);
@@ -124,6 +138,19 @@ app.get("/todos", auth, async function (req, res) {
 
 
 app.listen(3000);
+
+
+/// hashing is one way converison hashed means converting the plain passworfd into soem unreadful format 
+// when the two passeword is same we have to find a way that their hashed password should we diffenet 
+// to over come this problem thier is a consepts of salting in this we add some addtional string to the password now we hashed them it so it create a unique hashedpassword
+
+
+// why shoudld you hash password 
+// password hashing is a technique used to securely sotre passwwords in a way that makes them difficylt to reciver or missuse .instead of storing the actual password , oyu store a hashed version of it 
+
+//salt 
+// a popular approach to hashing password involves using a hashing algorithm that imcorprates a salt a random value addedd to the password before hashing. this prevents attackers from using precomputes tabels(rainbow tabels)to crack passwords;
+
 
 
 
