@@ -145,7 +145,7 @@ function auth(req, res, next) {
     const decodedData = jwt.verify(token, JWT_SECRET); // here we verify that we are the one who create this token
 
     if (decodedData) {
-        ;
+        
         // req.userId = decodedData.userId // ki jo request me user id ayi h or jo hamen bayi thi vo same h then we get the correct credentialas 
         req.userId = decodedData.id// agar upper wale me hamne decodeddata.id nahi likhi ye empty object return kar dega isliye hame jo id database bna rha h vo hi id deni h
         next();
