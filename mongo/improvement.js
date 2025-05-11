@@ -15,7 +15,7 @@ mongoose.connect("mongodb+srv://admin:admin05%40@cluster0.ntmjrlu.mongodb.net/to
 
 
 
-//  Signup
+
 app.post("/signup", async function (req, res) {
     const { email, password, name } = req.body;
 
@@ -24,7 +24,7 @@ app.post("/signup", async function (req, res) {
     }
 
     try {
-        // Hash the password with 10 salt rounds
+        
         const hashedpassword = await bcrypt.hash(password, 10);
 
         await UserModel.create({
@@ -36,7 +36,7 @@ app.post("/signup", async function (req, res) {
         res.json({ message: "You are signed up" });
 
     } catch (e) {
-        if (e.code === 11000) {  // Duplicate email error
+        if (e.code === 11000) { 
             return res.status(400).json({ message: "Email already in use" });
         }
         res.status(500).json({ message: "Signup failed", error: e.message });

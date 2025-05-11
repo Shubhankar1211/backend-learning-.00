@@ -5,7 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+<script>
+    function onButtonPress() {
+        const currentvalue = document.getElementById('btn').innerHTML;
+        const currentCounter = currentvalue.split(" ")[1];  // counter 0 => 0
+        const newCounter = parseInt(currentCounter) + 1;
+        document.getElementById("btn").innerHTML = "Counter " + newCounter;
+    }
+</script>
 <body>
-    
+    <button onclick="onButtonPress()" id="btn">Counter 0</button>
 </body>
 </html>
