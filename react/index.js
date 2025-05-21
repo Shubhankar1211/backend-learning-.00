@@ -56,5 +56,8 @@ whole summary
 6. The current algo used by the React is called the React Fibre algo.
 7. The algo react uses to differentiate the web browser's tree and React's tree formed through create root is called reconciliation.
 8. Reconciliation is the algo behind what popularly known as the Virtual-DOM.
-9.In UI it is not necessary for every update to be applied immediately. *
+9.In UI it is not necessary for every update to be applied immediately.
+
+we will continue react  when we reached home
+*
  */
