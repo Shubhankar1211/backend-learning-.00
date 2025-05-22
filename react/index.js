@@ -59,5 +59,6 @@ whole summary
 9.In UI it is not necessary for every update to be applied immediately.
 
 we will continue react  when we reached home
+react is a cakewalk we you know js 
 *
  */
