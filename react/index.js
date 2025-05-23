@@ -61,5 +61,7 @@ whole summary
 we will continue react  when we reached home
 react is a cakewalk we you know js 
 console.log("js")
+we will continue react after the end term exam 
+
 *
  */
