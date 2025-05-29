@@ -58,13 +58,6 @@ whole summary
 8. Reconciliation is the algo behind what popularly known as the Virtual-DOM.
 9.In UI it is not necessary for every update to be applied immediately.
 
-we will continue react  when we reached home
-react is a cakewalk we you know js 
-console.log("js")
-we will continue react after the end term exam 
-console.log()
-didn't code beacuse of my end term exams
-console.log("happy");hiii
-happy birthday
+
 *
  */
