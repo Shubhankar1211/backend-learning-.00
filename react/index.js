@@ -59,7 +59,7 @@ whole summary
 9.In UI it is not necessary for every update to be applied immediately.
 
 
-
+console.log()
 
 *
  */
