@@ -58,8 +58,23 @@ whole summary
 8. Reconciliation is the algo behind what popularly known as the Virtual-DOM.
 9.In UI it is not necessary for every update to be applied immediately.
 
-console.log("hello world")
+// summary of react 9.2
+here we are studing about the reacts hooks 
 
+use state
+ use state is a hook that lets you add state to fucntional components .it returns an array with the current state and a function to update it
+
+ in react we cant put row variables in dynamic state varialbes like this 
+
+ function counter(){
+
+   let count =0 ; // so this is a row varaible and we cant put on the in dynamic state
+   function increasecounter(){
+       count = count+1;
+     } // so it do not increase the count
+
+   return <div id= "text">{count}</h1>  here count is dynamic state
+ }
 
 *
  */
