@@ -1,13 +1,22 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Chai from "./Chai"
 function App() {
   const username = "shubhankar"
+  let [counterVisible , setcounterVisible] = useState(0);// this is conditional rendering
+
+  useEffect(function(){
+    setInterval(() => {
+      setcounterVisible(c => !c)
+    }, 5000);
+  },[])
+
   return (
     <>
       <Chai />
-      
+
       <h1>this code is written by {username}</h1>
-      <Counter></Counter>
+      {counterVisible ? <Counter></Counter> : null} 
+      {counterVisible && <Counter></Counter>}
     </>
   )
 }
@@ -18,7 +27,7 @@ function App() {
 
 
 // this is a simple counter application
-function Counter() {
+/*function Counter() {
   const [count , setcount] = useState(0);
   function incrementcount(){
     setcount(count+1);
@@ -39,4 +48,47 @@ function Counter() {
     </div>
   </>
 }
+*/
+
+
+
+function Counter() {
+
+  const [count, setcount] = useState(0); // these are called state variavbles
+
+
+// use effect hook hooks in the life cycle event like mounting re-rendering and de-mounting
+// like when the count first time mount or first time take place in dom i only time i wanat to run the logic of setinterval
+// simple meaning i wnat to run some logic only on mount(jab phli war ye component render hoyii) use ek baad main logic run hoye only one time usek baad jab dobar run hoye coomponte jab ye lgic run na hoyee 
+
+console.log("counter");// this is how re-rendering like everytime counter run it renders the whole bunch of code
+
+  // gaurd our setinterval form re-renders
+  useEffect(function () { // use effect is called every itme but the logic inside it will not run everytime
+      let clock = setInterval(function () {
+     // setcount(count + 1);// this will not work it will stuck in the count of 1 becuse niche wale array em hamen count ko pass nhai kiya h to make it work we can use fucntion
+     setcount(function(count){
+      return count+1;
+     })
+    }, 1000)
+    console.log("mounted"); // this only logs only one
+
+
+
+    return function(){ // this is clean up or stoping the interval or called de mounting // it is very important things
+      clearInterval(clock);
+    }
+  },[]) // dependency array
+  
+
+  
+  return <>
+    <h1 id="text" >{count}</h1>
+    <button onClick={incrementcount}>increase count</button>
+  </>
+}
+
+
 export default App
+
+// conditional rendering  kabhi kabhi i want to render this counter varibale render sometimes

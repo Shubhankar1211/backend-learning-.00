@@ -76,5 +76,7 @@ use state
    return <div id= "text">{count}</h1>  here count is dynamic state
  }
 
+ mouting is the lifecycle event which i only want to run 1 time 
+ re- rendering , unmiunting
 *
  */
