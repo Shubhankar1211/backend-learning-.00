@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import Chai from "./Chai"
-function App() {
+/*function App() {
   const username = "shubhankar"
   let [counterVisible , setcounterVisible] = useState(0);// this is conditional rendering
 
@@ -20,6 +20,50 @@ function App() {
     </>
   )
 }
+  */
+
+
+function App() {
+  const [count, setcount] = useState(0);
+  function increase() {
+    setcount(c => c + 1);
+  }
+  return <>
+    <Counter count={count} />
+    <button onClick={increase}>Increase count</button>
+  </>
+}
+
+
+function Counter(props) {
+
+
+  useEffect(function () {
+    console.log("mount")
+
+    return function () {
+      console.log("unmonted")
+    }
+  }, [])
+
+
+  useEffect(function(){
+    console.log("count has changed")
+
+    return function(){
+      console.log("cleanup inside second effect");
+    }
+  }[props.count])
+
+
+
+  return <>
+    Counter{props.count}
+  </>
+}
+
+
+
 
 
 // so this{username} is evaluting expression we called this expression eith username we called it evaluting expression
@@ -51,7 +95,7 @@ function App() {
 */
 
 
-
+/*
 function Counter() {
 
   const [count, setcount] = useState(0); // these are called state variavbles
@@ -87,8 +131,10 @@ console.log("counter");// this is how re-rendering like everytime counter run it
     <button onClick={incrementcount}>increase count</button>
   </>
 }
+*/
+
+
 
 
 export default App
-
 // conditional rendering  kabhi kabhi i want to render this counter varibale render sometimes
