@@ -47,10 +47,10 @@ function Counter(props) {
   }, [])
 
 
-  useEffect(function(){
+  useEffect(function () {
     console.log("count has changed")
 
-    return function(){
+    return function () {
       console.log("cleanup inside second effect");
     }
   }[props.count])
