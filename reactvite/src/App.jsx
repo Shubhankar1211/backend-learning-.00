@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react"
-import Chai from "./Chai"
+
 /*function App() {
   const username = "shubhankar"
   let [counterVisible , setcounterVisible] = useState(0);// this is conditional rendering
@@ -22,7 +21,7 @@ import Chai from "./Chai"
 }
   */
 
-
+/*
 function App() {
   const [count, setcount] = useState(0);
   function increase() {
@@ -53,7 +52,7 @@ function Counter(props) {
     return function () {
       console.log("cleanup inside second effect");
     }
-  }[props.count])
+  },[props.count])
 
 
 
@@ -63,7 +62,7 @@ function Counter(props) {
 }
 
 
-
+*/
 
 
 // so this{username} is evaluting expression we called this expression eith username we called it evaluting expression
@@ -135,6 +134,68 @@ console.log("counter");// this is how re-rendering like everytime counter run it
 
 
 
+// making the linkdin post card 
+function App() {
+  return (
 
-export default App
+    <div style={{ background: "#dfe6e9", height: "100vh" }}>
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <div>
+          <div>
+            <PostComponent />
+            <br />
+          </div>
+          <div>
+            <PostComponent />
+            <br />
+          </div>
+          <div>
+            <PostComponent />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+const style = {
+  width: 200,
+  backgroundColor: "white",
+  borderRadius: 10,
+  borderColor: "gray",
+  borderWidth: 1,
+  borderStyle: "solid", // important
+  display: "flex", // fixed space
+  alignItems: "center", // optional: helps image and text align
+  padding: 8, // optional: adds some padding
+  gap: 10, // optional: adds spacing between image and text
+};
+
+function PostComponent() {
+  return <div style={style}>
+    <div style={{ display: "flex" }}>
+      <img
+        src={
+          "https://thumbs.dreamstime.com/b/apple-logo-white-color-brand-front-store-las-vegas-120446030.jpg"
+        }
+        style={{
+          width: 20,
+          height: 20,
+          borderRadius: 20,
+        }} />
+      <div style={{ fontSize: 10, marginLeft: 10 }}>
+        <b>100xdevs</b>
+        <div>23,888 followers</div>
+        <div>12m</div>
+      </div>
+    </div>
+    <div style={{ fontSize: 12 }}>
+      What to know how to win big? Check out how these folks won $6000 in bounties
+    </div>
+  </div>
+}
+
+export default App;
+
 // conditional rendering  kabhi kabhi i want to render this counter varibale render sometimes
+// react dom is the render of the react website

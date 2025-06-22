@@ -77,6 +77,12 @@ use state
  }
 
  mouting is the lifecycle event which i only want to run 1 time 
- re- rendering , unmiunting
-*
+ re- rendering , 
+ 
+
+
+9,3
+
+in components are the building vbloacks of the user interface. they allow you to spilt  the ui  iot indepnednet ,
+reusable pieces that can  thought of as custom, self- contianed HTML elemnets
  */
