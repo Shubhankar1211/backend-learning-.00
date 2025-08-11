@@ -8,10 +8,7 @@ function App() {
 
   return (
     <>
-      <div>hello world</div>
-      <div>hii</div>
-      <p></p>
-      <div></div>      
+           <div>wprking on new ideas</div>
     </>
   )
 }
