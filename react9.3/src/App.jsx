@@ -8,8 +8,7 @@ function App() {
 
   return (
     <>
-           <div>wprking on new ideas</div>
-           <p>need internship</p>
+    
     </>
   )
 }
