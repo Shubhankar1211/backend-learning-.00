@@ -144,8 +144,10 @@ there is two ways to send request
 
 
 middleware 
-1 - it wmay or may not change the request object 
+1 - it wmay or may not change the request object.
+ 
 2- it will either stop the request right there or froward the request to the real route handler
+
 
 
 
