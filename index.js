@@ -132,6 +132,9 @@ content type - type of infirmation cleint is sending (json,binary etc)
 referre - which url is this request coming from 
 
 response headers
+
+
+
 request headers it contains someimportant data wich might leaks like user password or many thingns and also some atuhenticaton data
 
 
