@@ -49,6 +49,8 @@ app.get('/',function(req,res){
 })
 
 
+
+
 // in post request we generally use pbody
 app.post('/',function(req,res){
    const isHealthy = req.body.isHealthy;  // right now this is showing error the error is //  Cannot read properties of undefined (reading 'isHealthy') 
