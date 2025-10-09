@@ -96,8 +96,6 @@ app.delete('/',function(req,res){
             msg : "You have no bad kidneys"
         });
     }
-
-   
 })
 
 function isThereAtleastOneUnhealthyKidney(){
