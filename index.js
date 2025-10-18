@@ -115,6 +115,11 @@ function isThereAtleastOneUnhealthyKidney(){
 app.listen(3000);
 
 /*
+
+
+
+
+
 key hieghtlights
 The filter() method in JavaScript is used to create a new array containing only the elements that pass a certain condition (i.e., return true from a function).
 
