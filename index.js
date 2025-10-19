@@ -135,6 +135,9 @@ It’s a built-in middleware that reads the raw request body, parses the JSON, a
 
 
 
+
+
+
 5.1 ->>>>>>>>>>>>>>
 headers soem extra meta data which we send to the server along with the body and server also response back with it
 headers arer kety key value [airs sent between a client(like a web browser) and a server in an http request and response .they convey metadaata about the request or response ,suh as content type ,auth infirmation etc.
