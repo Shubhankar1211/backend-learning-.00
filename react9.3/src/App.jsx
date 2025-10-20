@@ -8,7 +8,7 @@ function App() {
 
   return (
     <>
-    <div>making new compopnenets</div>
+    <div>making new compopnenetss</div>
     </>
   )
 }
